@@ -1,7 +1,14 @@
-import Heading from "../ui/Heading";
+import React from 'react'
+import Heading from '../ui/Heading'
+import SignupForm from "../features/authentication/SignupForm"
 
-function NewUsers() {
-  return <Heading as="h1">Create a new user</Heading>;
+const NewUsers = () => {
+  return (
+    <>
+        <Heading as = "h1">Create a new user</Heading>
+        <SignupForm/>
+    </>
+  )
 }
 
-export default NewUsers;
+export default NewUsers
