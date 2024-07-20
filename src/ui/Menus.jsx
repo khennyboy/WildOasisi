@@ -81,7 +81,8 @@ function Menus(info) {
 
 function Toggle(info) {
   const { id } = info
-  const { openId, close, setOpenId, setPosition, position } = useContext(MenusContext)
+  const { openId, close, setOpenId, setPosition } = useContext(MenusContext)
+
   const [clickElement, setClickElement] = useState()
 
   useEffect(() => {

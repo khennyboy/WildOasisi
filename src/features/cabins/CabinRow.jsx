@@ -48,9 +48,9 @@ const Discount = styled.div`
   color: var(--color-green-700);
 `;
 
-const CabinRow = (cabin) => {
-  const { id, name, maxCapacity, regularPrice, discount, image, description } =
-    cabin.cabin;
+const CabinRow = (infos) => {
+  const { cabin } = infos
+  const { id, name, maxCapacity, regularPrice, discount, image, description } = cabin;
   const { createCabin } = useCreateCabin();
   const { isDeleting, deleteCabin } = useDeleteCabin();
   function handleDuplicate() {
@@ -95,7 +95,7 @@ const CabinRow = (cabin) => {
             </Menus.List>
 
             <Modal.Window name="edit">
-              <CreateCabinForm cabinToEdit={cabin.cabin} />
+              <CreateCabinForm cabinToEdit={cabin} />
             </Modal.Window>
 
             <Modal.Window name="delete">

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { isFuture, isPast, isToday } from "date-fns";
-import supabase from "../services/supabase";
+import Supabase from "../services/Supabase";
 import Button from "../ui/Button";
 import { subtractDates } from "../utils/helpers";
 
@@ -16,38 +16,39 @@ import { guests } from "./data-guests";
 // };
 
 async function deleteGuests() {
-  const { error } = await supabase.from("guests").delete().gt("id", 0);
+  const { error } = await Supabase.from("guests").delete().gt("id", 0);
   if (error) console.log(error.message);
 }
 
 async function deleteCabins() {
-  const { error } = await supabase.from("cabins").delete().gt("id", 0);
+  const { error } = await Supabase.from("cabins").delete().gt("id", 0);
   if (error) console.log(error.message);
 }
 
 async function deleteBookings() {
-  const { error } = await supabase.from("bookings").delete().gt("id", 0);
+  const { error } = await Supabase.from("bookings").delete().gt("id", 0);
   if (error) console.log(error.message);
 }
 
 async function createGuests() {
-  const { error } = await supabase.from("guests").insert(guests);
+  const { error } = await Supabase.from("guests").insert(guests);
   if (error) console.log(error.message);
 }
 
 async function createCabins() {
-  const { error } = await supabase.from("cabins").insert(cabins);
+  const { error } = await Supabase.from("cabins").insert(cabins);
   if (error) console.log(error.message);
 }
 
 async function createBookings() {
   // Bookings need a guestId and a cabinId. We can't tell Supabase IDs for each object, it will calculate them on its own. So it might be different for different people, especially after multiple uploads. Therefore, we need to first get all guestIds and cabinIds, and then replace the original IDs in the booking data with the actual ones from the DB
-  const { data: guestsIds } = await supabase
+  const { data: guestsIds } = await Supabase
     .from("guests")
     .select("id")
     .order("id");
+
   const allGuestIds = guestsIds.map((cabin) => cabin.id);
-  const { data: cabinsIds } = await supabase
+  const { data: cabinsIds } = await Supabase
     .from("cabins")
     .select("id")
     .order("id");
@@ -96,7 +97,7 @@ async function createBookings() {
 
   console.log(finalBookings);
 
-  const { error } = await supabase.from("bookings").insert(finalBookings);
+  const { error } = await Supabase.from("bookings").insert(finalBookings);
   if (error) console.log(error.message);
 }
 

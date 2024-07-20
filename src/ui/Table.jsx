@@ -62,36 +62,35 @@ const Empty = styled.p`
 
 const TableContext = createContext();
 
-function Table(infos){
-  const {columns, children} = infos;
-  return(
-    <TableContext.Provider value={{columns}}>
-        <StyledTable role="table">{children}</StyledTable>
+function Table(infos) {
+  const { columns, children } = infos;
+  return (
+    <TableContext.Provider value={{ columns }}>
+      <StyledTable role="table">{children}</StyledTable>
     </TableContext.Provider>
   )
 }
 
-function Header(info){
-  const {children} = info;
-  const {columns} = useContext(TableContext)
-  return(
-    <StyledHeader role="row" columns = {columns} as = 'header'>
+function Header(info) {
+  const { children } = info;
+  const { columns } = useContext(TableContext)
+  return (
+    <StyledHeader role="row" columns={columns} as='header'>
       {children}
     </StyledHeader>
   )
 }
-function Row(info){
-  const {children} = info;
-  const {columns} = useContext(TableContext)
-  return(
-    <StyledRow role="row" columns = {columns}>
+function Row(info) {
+  const { children } = info;
+  const { columns } = useContext(TableContext)
+  return (
+    <StyledRow role="row" columns={columns}>
       {children}
     </StyledRow>
   )
 }
-function Body(info){
-  const {data, render} = info;
-  if(!data.length) return <Empty>No data to show at the moment</Empty>
+function Body(info) {
+  const { data, render } = info;
   return (
     <StyledBody>
       {data.map(render)}
