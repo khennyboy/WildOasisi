@@ -1,6 +1,8 @@
 import {useEffect, useRef} from 'react'
 
-function useOutSideClick(handler, listenCapturing = true) {
+function useOutSideClick(handler) {
+    // the true parameter here means it should use capturing which means to handle
+    // the outer event listener first
     const formRef = useRef()
     useEffect(()=>{
     function handleClick(e){
@@ -8,12 +10,10 @@ function useOutSideClick(handler, listenCapturing = true) {
         handler()
         }
     }
-    document.addEventListener("click", handleClick, listenCapturing)
-    // this means js should use capturing and capturing means that the 
-    // the parent click is handled first
+    document.addEventListener("click", handleClick)
 
-    return ()=> document.removeEventListener("click", handleClick, listenCapturing)
-    }, [handler, listenCapturing]);
+    return ()=> document.removeEventListener("click", handleClick)
+    }, [handler]);
     return formRef;
 }
 

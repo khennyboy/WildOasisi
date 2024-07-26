@@ -109,6 +109,7 @@ function Toggle(info) {
 
 
   const handleClick = (e) => {
+    e.stopPropagation()
     setClickElement(e.target.closest('button'))
     const rect = e.target.closest('button').getBoundingClientRect();
     setPosition({
@@ -117,6 +118,7 @@ function Toggle(info) {
     });
 
     openId === '' || openId !== id ? setOpenId(id) : close()
+
   }
   return (
     <StyledToggle onClick={handleClick}>

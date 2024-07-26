@@ -68,7 +68,8 @@ function Open(infos) {
   const { setOpenName } = useContext(ModalContext)
 
   return cloneElement(children, {
-    onClick: () => {
+    onClick: (e) => {
+      e.stopPropagation()
       setOpenName(opensWindowName)
     }
   })

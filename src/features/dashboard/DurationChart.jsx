@@ -105,7 +105,6 @@ const startDataDark = [
 ];
 
 function prepareData(startData, stays) {
-  // A bit ugly code, but sometimes this is what it takes when working with real data 😅
 
   function incArrayValue(arr, field) {
     return arr.map((obj) =>
@@ -130,3 +129,52 @@ function prepareData(startData, stays) {
 
   return data;
 }
+
+
+import React, { useContext } from 'react'
+import Heading from "../../ui/Heading";
+import { Cell, Legend, Pie, PieChart, ResponsiveContainer, Tooltip } from "recharts";
+import { DarkModeContext } from "../../context/DarkmodeContext";
+
+const DurationChart = (info) => {
+
+  const { IsDark } = useContext(DarkModeContext)
+  const startData = IsDark ? startDataDark : startDataLight
+  const { confirmedStays } = info
+
+
+  const data = prepareData(startData, confirmedStays)
+
+  return (
+    <ChartBox>
+      <Heading as='h2'>Stay duration summary</Heading>
+      <ResponsiveContainer width='100%' height={240}>
+        <PieChart>
+          <Pie data={data}
+            nameKey='duration'
+            dataKey='value'
+            innerRadius={85}
+            outerRadius={110}
+            cx='40%'
+            cy='50%'
+            paddingAngle={3}>
+            {startDataLight.map(entry => (
+              <Cell
+                fill={entry.color}
+                stroke={entry.color}
+                key={entry.duration} />))}
+          </Pie>
+          <Tooltip />
+          <Legend verticalAlign="middle"
+            align="right"
+            width='30%'
+            iconSize={15}
+            iconType="circle"
+            layout="vertical" />
+        </PieChart>
+      </ResponsiveContainer>
+    </ChartBox>
+  )
+}
+
+export default DurationChart
