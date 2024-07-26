@@ -8,5 +8,5 @@ export function useUser(){
         retry: false
     })
     
-    return {isLoading, isAuthenticated: userData?.user?.role === "authenticated"}
+    return {isLoading, isAuthenticated: userData?.user?.role === "authenticated", userData}
 }

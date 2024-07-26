@@ -1,17 +1,13 @@
 import { useState, useEffect } from "react";
+import { NAME_OF_SESSIONSTORAGE } from "../utils/Constant";
 
-export function useLocalStorageState(initialState, key) {
-  const [value, setValue] = useState(function () {
-    const storedValue = localStorage.getItem(key);
-    return storedValue ? JSON.parse(storedValue) : initialState;
-  });
+export function useLocalStorageState() {
+  const [value, setValue] = useState(window.matchMedia("(prefers-color-scheme: dark)").matches)
 
-  useEffect(
-    function () {
-      localStorage.setItem(key, JSON.stringify(value));
-    },
-    [value, key]
-  );
+  useEffect(()=>{
+    const storage = JSON.parse(localStorage.getItem(NAME_OF_SESSIONSTORAGE)) 
+    if(storage !== null) setValue(storage)
+  }, [])
 
   return [value, setValue];
 }

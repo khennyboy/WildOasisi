@@ -62,7 +62,7 @@ export async function getBookingsAfterDate(date) {
     .select("created_at, totalPrice, extrasPrice")
     .gte("created_at", date)
     .lte("created_at", getToday({ end: true }));
-
+    
   if (error) {
     console.error(error);
     throw new Error("Bookings could not get loaded");

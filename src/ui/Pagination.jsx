@@ -74,7 +74,6 @@ const Pagination = (infos) => {
     const next = currentPage === pageCount ? currentPage : currentPage += 1
     searchParams.set('page', next)
     setSearchParams(searchParams)
-
   }
   function prevPage() {
     const prev = currentPage === 1 ? currentPage : currentPage -= 1

@@ -21,6 +21,7 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { Toaster } from "react-hot-toast";
 import Booking from "./pages/Booking";
 import Checkin from "./pages/CheckIn";
+import { DarkModeProvider } from "./context/DarkmodeContext";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -58,74 +59,37 @@ const router = createBrowserRouter(
 );
 const App = () => {
   return (
-    <QueryClientProvider client={queryClient}>
-      <ReactQueryDevtools initialIsOpen={false} />
-      <RouterProvider router={router} />
-      <GlobalStyles />
+    <DarkModeProvider>
+      <QueryClientProvider client={queryClient}>
+        <ReactQueryDevtools initialIsOpen={false} />
+        <RouterProvider router={router} />
+        <GlobalStyles />
 
-      <Toaster
-        position="top-center"
-        gutter={12}
-        containerStyle={{ margin: "8px" }}
-        toastOptions={{
-          success: {
-            duration: 3000,
-          },
-          error: {
-            duration: 5000,
-          },
-          style: {
-            fontSize: "16px",
-            maxWidth: "500px",
-            padding: "16px 24px",
-            backgroundColor: "var(--color-grey-0)",
-            color: "var(--color-grey-700)",
-          },
-        }}
-      />
-    </QueryClientProvider>
-  );
+        <Toaster
+          position="top-center"
+          gutter={12}
+          containerStyle={{ margin: "8px" }}
+          toastOptions={{
+            success: {
+              duration: 3000,
+            },
+            error: {
+              duration: 5000,
+            },
+            style: {
+              fontSize: "16px",
+              maxWidth: "500px",
+              padding: "16px 24px",
+              backgroundColor: "var(--color-grey-0)",
+              color: "var(--color-grey-700)",
+            },
+          }}
+        />
+
+      </QueryClientProvider>
+    </DarkModeProvider>
+
+  )
 };
 
 export default App;
-
-// import styled from "styled-components"
-// import GlobalStyles from "./styles/GlobalStyle"
-// import Button from "./ui/Button"
-// import Input from "./ui/Input"
-// import Heading from "./ui/Heading"
-// import Row from "./ui/Row"
-
-// const StyledApp = styled.div`
-//   padding: 20px;
-// `
-
-// const App = () => {
-
-//   return (
-//     <>
-//       <GlobalStyles/>
-//       <StyledApp>
-//         <Row >
-//           <Row type= 'horizontal'>
-//             <Heading type='h1'>The Wild Oasis</Heading>
-//             <div>
-//               <Heading as='h2' type = 'h2'>Check in and out</Heading>
-//               <Button >Check in</Button>
-//               <Button variation = 'secondary' size= 'small'>Check Out</Button>
-//             </div>
-//           </Row>
-//           <Row >
-//             <Heading as ='h3' type = 'h3'>Form</Heading>
-//             <form>
-//               <Input type="number" placeholder="Number of Guests"/>
-//               <Input type="number" placeholder="Number of Guests"/>
-//             </form>
-//           </Row>
-//         </Row>
-//       </StyledApp>
-//     </>
-//   )
-// }
-
-// export default App
