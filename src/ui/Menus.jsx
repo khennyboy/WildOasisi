@@ -144,10 +144,11 @@ function Button(info) {
   const { children, icon, onClick } = info;
   const { close } = useContext(MenusContext)
 
-  function handleClick() {
-    onClick?.()
+  function handleClick(e) {
+    onClick?.(e)
     close()
   }
+
   return (
     <li>
       <StyledButton onClick={handleClick}>
