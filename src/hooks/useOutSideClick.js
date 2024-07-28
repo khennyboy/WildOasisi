@@ -1,8 +1,6 @@
 import {useEffect, useRef} from 'react'
 
 function useOutSideClick(handler) {
-    // the true parameter here means it should use capturing which means to handle
-    // the outer event listener first
     const formRef = useRef()
     useEffect(()=>{
     function handleClick(e){

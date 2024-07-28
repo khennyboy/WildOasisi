@@ -13,18 +13,18 @@ const FullPage = styled.div`
 `;
 
 const ProtectedRoute = (infos) => {
-    const {children} = infos
+    const { children } = infos
     const navigate = useNavigate();
 
-    const { isLoading, isAuthenticated} = useUser();
+    const { isLoading, isAuthenticated } = useUser();
     useEffect(
         function () {
-          if (!isAuthenticated && !isLoading) navigate("/login");
+            if (!isAuthenticated && !isLoading) navigate("/login/");
         },
         [isAuthenticated, isLoading, navigate]
-      );
-    
-   
+    );
+
+
     if (isLoading) {
         return (
             <FullPage>
@@ -32,7 +32,7 @@ const ProtectedRoute = (infos) => {
             </FullPage>
         );
     }
-  
+
     if (isAuthenticated) {
         return <>{children}</>;
     }
