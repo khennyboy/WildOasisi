@@ -4,11 +4,11 @@ import { DarkModeContext } from "../context/DarkmodeContext";
 import { useContext } from "react";
 
 function DarkModeToggle() {
-    const { isDarkMode, toggleDarkMode } = useContext(DarkModeContext);
+    const { IsDark, toggleDarkMode } = useContext(DarkModeContext);
 
     return (
         <ButtonIcon onClick={toggleDarkMode}>
-            {isDarkMode ? <HiOutlineSun /> : <HiOutlineMoon />}
+            {IsDark ? <HiOutlineSun /> : <HiOutlineMoon />}
         </ButtonIcon>
     );
 }
